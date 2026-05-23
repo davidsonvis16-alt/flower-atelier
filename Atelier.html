@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Flower Atelier | Premium Bouquets · Nairobi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:        #fdf9f5;
+      --bg2:       #f7f1ea;
+      --bg3:       #ffffff;
+      --green:     #3d6b52;
+      --green-lt:  #5a8f6e;
+      --green-dim: rgba(61,107,82,0.09);
+      --rose:      #c95c72;
+      --rose-lt:   #e0909f;
+      --rose-dim:  rgba(201,92,114,0.1);
+      --gold:      #b8923a;
+      --text:      #1c1410;
+      --text2:     #5a4e48;
+      --muted:     #9a8a82;
+      --border:    rgba(0,0,0,0.09);
+      --border-md: rgba(0,0,0,0.16);
+      --shadow-sm: 0 2px 16px rgba(0,0,0,0.06);
+      --shadow-md: 0 10px 48px rgba(0,0,0,0.11);
+      --shadow-lg: 0 28px 80px rgba(0,0,0,0.16);
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-weight: 300; overflow-x: hidden; }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg2); }
+    ::-webkit-scrollbar-thumb { background: var(--rose-lt); border-radius: 2px; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 22px 56px;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: all 0.4s ease;
+    }
+    nav.scrolled {
+      background: rgba(253,249,245,0.94);
+      backdrop-filter: blur(20px);
+      padding: 14px 56px;
+      border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 600;
+      color: var(--green); text-decoration: none; letter-spacing: 0.04em;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .nav-logo i { font-size: 1rem; color: var(--rose); }
+    .nav-logo span { color: var(--rose); font-style: italic; font-weight: 400; }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a { color: var(--text2); text-decoration: none; font-size: 0.82rem; letter-spacing: 0.06em; transition: color 0.3s; }
+    .nav-links a:hover { color: var(--green); }
+    .nav-cta {
+      background: var(--rose); color: #fff; padding: 10px 26px;
+      text-decoration: none; font-size: 0.78rem; letter-spacing: 0.1em;
+      text-transform: uppercase; transition: all 0.3s; border-radius: 2px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .nav-cta i { font-size: 0.8rem; }
+    .nav-cta:hover { background: #a8485e; transform: translateY(-1px); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; border: none; background: none; padding: 4px; }
+    .hamburger span { width: 24px; height: 1.5px; background: var(--green); display: block; transition: all 0.3s; }
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(4.5px,4.5px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(4.5px,-4.5px); }
+    .mobile-menu {
+      display: none; position: fixed; inset: 0; z-index: 150;
+      background: rgba(253,249,245,0.98);
+      flex-direction: column; align-items: center; justify-content: center; gap: 32px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--text); text-decoration: none; transition: color 0.3s; }
+    .mobile-menu a:hover { color: var(--rose); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden;
+      background: linear-gradient(140deg, #fdf9f5 0%, #f7ede8 45%, #efe8e2 100%);
+    }
+    .hero-decor { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+    .hc { position: absolute; border-radius: 50%; }
+    .hc1 { width: 680px; height: 680px; top: -180px; right: -120px; background: radial-gradient(circle, rgba(201,92,114,0.09), transparent 70%); }
+    .hc2 { width: 380px; height: 380px; bottom: -100px; left: -60px; background: radial-gradient(circle, rgba(61,107,82,0.08), transparent 70%); }
+    .hc3 { width: 260px; height: 260px; top: 35%; left: 22%; background: radial-gradient(circle, rgba(184,146,58,0.05), transparent 70%); }
+    .hero-inner {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+      max-width: 1200px; margin: 0 auto; padding: 130px 56px 90px; position: relative; z-index: 1; width: 100%;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--green-dim); color: var(--green);
+      padding: 7px 18px; border-radius: 40px;
+      font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+      margin-bottom: 28px; opacity: 0; animation: fadeUp 1s 0.3s forwards;
+    }
+    .hero-eyebrow i { font-size: 0.78rem; color: var(--rose); }
+    h1.hero-title {
+      font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 5vw, 4.6rem);
+      font-weight: 400; line-height: 1.1; margin-bottom: 22px;
+      opacity: 0; animation: fadeUp 1s 0.5s forwards;
+    }
+    h1.hero-title em { font-style: italic; color: var(--rose); }
+    .hero-sub {
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+      font-size: 1.2rem; color: var(--text2); line-height: 1.75; margin-bottom: 36px;
+      opacity: 0; animation: fadeUp 1s 0.7s forwards;
+    }
+    .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; opacity: 0; animation: fadeUp 1s 0.9s forwards; }
+    .tag {
+      padding: 6px 16px; border: 1px solid var(--border-md); border-radius: 40px;
+      font-size: 0.74rem; color: var(--text2); background: #fff;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .tag i { font-size: 0.65rem; color: var(--rose); }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; opacity: 0; animation: fadeUp 1s 1.1s forwards; }
+    .btn-primary {
+      background: var(--rose); color: #fff; padding: 14px 32px; border: none;
+      font-family: 'DM Sans', sans-serif; font-size: 0.82rem; letter-spacing: 0.1em;
+      text-transform: uppercase; cursor: pointer; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 9px;
+      transition: all 0.3s; border-radius: 2px;
+    }
+    .btn-primary:hover { background: #a8485e; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,92,114,0.3); }
+    .btn-ghost {
+      background: transparent; color: var(--green); padding: 14px 32px;
+      border: 1.5px solid var(--green); font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase;
+      cursor: pointer; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 9px;
+      transition: all 0.3s; border-radius: 2px;
+    }
+    .btn-ghost:hover { background: var(--green); color: #fff; transform: translateY(-2px); }
+    .hero-visual { position: relative; opacity: 0; animation: fadeIn 1.2s 0.6s forwards; }
+    .hero-img-wrap {
+      position: relative; border-radius: 55% 45% 50% 50% / 50% 50% 45% 55%;
+      overflow: hidden; aspect-ratio: 0.88; box-shadow: var(--shadow-lg);
+    }
+    .hero-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-badge {
+      position: absolute; bottom: 44px; left: -22px;
+      background: #fff; padding: 18px 26px; box-shadow: var(--shadow-md);
+      border-radius: 4px; min-width: 170px; border-left: 3px solid var(--rose);
+    }
+    .hero-badge-num { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--rose); font-weight: 600; line-height: 1; }
+    .hero-badge-label { font-size: 0.7rem; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.1em; }
+    .hero-badge2 {
+      position: absolute; top: 44px; right: -18px;
+      background: var(--green); color: #fff; padding: 12px 20px;
+      border-radius: 4px; font-size: 0.8rem; box-shadow: var(--shadow-md);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .hero-badge2 i { font-size: 0.75rem; color: #f5c842; }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+    /* ── SECTIONS COMMON ── */
+    .section-wrap { max-width: 1200px; margin: 0 auto; padding: 0 56px; }
+    .section-hdr { text-align: center; margin-bottom: 64px; }
+    .eyebrow {
+      display: inline-block; font-size: 0.7rem; letter-spacing: 0.24em;
+      text-transform: uppercase; color: var(--rose); margin-bottom: 14px;
+    }
+    .eyebrow::before, .eyebrow::after { content: '—'; margin: 0 8px; opacity: 0.45; }
+    h2.section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.9rem,3.5vw,3rem); font-weight: 400; color: var(--text); line-height: 1.2; }
+    h2.section-title em { font-style: italic; color: var(--rose); }
+    .section-sub { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.15rem; color: var(--muted); margin-top: 14px; line-height: 1.7; }
+    .divider { width: 48px; height: 2px; background: linear-gradient(to right, var(--rose-lt), var(--gold)); margin: 20px auto 0; border-radius: 2px; }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.75s ease, transform 0.75s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .d1{transition-delay:.1s;} .d2{transition-delay:.2s;} .d3{transition-delay:.3s;} .d4{transition-delay:.4s;}
+
+    /* ── STATS ── */
+    #stats { padding: 56px 0; background: var(--green); }
+    .stats-grid { display: grid; grid-template-columns: repeat(4,1fr); }
+    .stat-item { padding: 28px; text-align: center; border-right: 1px solid rgba(255,255,255,0.14); }
+    .stat-item:last-child { border-right: none; }
+    .stat-icon { font-size: 1.4rem; color: rgba(255,255,255,0.4); margin-bottom: 14px; }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 600; color: #fff; line-height: 1; margin-bottom: 6px; }
+    .stat-lbl { font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.55); }
+
+    /* ── OCCASIONS (PHOTO CARDS) ── */
+    #occasions { padding: 110px 0; }
+    .occ-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 4px; }
+    .occ-card { position: relative; aspect-ratio: 16/10; overflow: hidden; cursor: pointer; }
+    .occ-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease; filter: brightness(0.62) saturate(0.85); }
+    .occ-card:hover img { transform: scale(1.06); filter: brightness(0.72) saturate(1); }
+    .occ-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(28,20,16,0.88) 0%, rgba(28,20,16,0.1) 55%);
+      display: flex; flex-direction: column; justify-content: flex-end; padding: 36px;
+    }
+    .occ-icon-wrap {
+      width: 48px; height: 48px; border: 1.5px solid rgba(255,255,255,0.4);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 1.1rem; margin-bottom: 14px; background: rgba(255,255,255,0.08);
+    }
+    .occ-title { font-family: 'Playfair Display', serif; font-size: 1.7rem; font-weight: 400; color: #fff; margin-bottom: 8px; }
+    .occ-desc { font-size: 0.85rem; color: rgba(255,255,255,0.72); line-height: 1.65; max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
+    .occ-card:hover .occ-desc { max-height: 80px; }
+    .occ-label {
+      position: absolute; top: 20px; right: 20px;
+      padding: 4px 14px; border: 1px solid rgba(255,255,255,0.35);
+      font-size: 0.64rem; letter-spacing: 0.16em; text-transform: uppercase; color: #fff;
+      border-radius: 40px; background: rgba(255,255,255,0.08);
+    }
+    .occ-cta {
+      display: inline-flex; align-items: center; gap: 7px;
+      margin-top: 14px; font-size: 0.75rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--rose-lt); text-decoration: none;
+      opacity: 0; transform: translateY(8px);
+      transition: opacity 0.4s, transform 0.4s;
+    }
+    .occ-card:hover .occ-cta { opacity: 1; transform: translateY(0); }
+
+    /* ── COLLECTION ── */
+    #collection { padding: 110px 0; background: var(--bg2); }
+    .packages-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
+    .pkg {
+      background: #fff; border: 1px solid var(--border); padding: 36px 24px;
+      text-align: center; transition: all 0.35s; position: relative; overflow: hidden;
+    }
+    .pkg:hover { box-shadow: var(--shadow-md); transform: translateY(-6px); border-color: var(--border-md); }
+    .pkg.pop { border-color: var(--rose); border-top-width: 3px; }
+    .pop-tag {
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      background: var(--rose); color: #fff; font-size: 0.6rem;
+      letter-spacing: 0.14em; text-transform: uppercase; padding: 4px 18px;
+      border-radius: 0 0 8px 8px;
+    }
+    .pkg-icon { font-size: 1.6rem; color: var(--rose); margin-bottom: 14px; margin-top: 10px; }
+    .pkg-stems { font-family: 'Playfair Display', serif; font-size: 3.4rem; font-weight: 600; color: var(--text); line-height: 1; }
+    .pkg-unit { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+    .pkg-type { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1rem; color: var(--green); margin-bottom: 20px; }
+    .pkg-list { list-style: none; text-align: left; margin-bottom: 24px; }
+    .pkg-list li {
+      font-size: 0.82rem; color: var(--text2); padding: 7px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 9px;
+    }
+    .pkg-list li i { color: var(--green); font-size: 0.7rem; flex-shrink: 0; }
+    .pkg-price { font-family: 'Playfair Display', serif; font-size: 1.65rem; color: var(--text); margin-bottom: 20px; }
+    .pkg-price sub { font-family: 'DM Sans', sans-serif; font-size: 0.75rem; color: var(--muted); font-weight: 300; vertical-align: middle; }
+    .btn-order {
+      display: flex; width: 100%; padding: 12px; align-items: center; justify-content: center; gap: 8px;
+      background: transparent; border: 1.5px solid var(--rose); color: var(--rose);
+      font-family: 'DM Sans', sans-serif; font-size: 0.75rem; letter-spacing: 0.12em;
+      text-transform: uppercase; text-decoration: none; text-align: center;
+      transition: all 0.3s; cursor: pointer; border-radius: 2px;
+    }
+    .btn-order i { font-size: 0.85rem; }
+    .btn-order:hover, .pkg.pop .btn-order { background: var(--rose); color: #fff; }
+    .custom-row {
+      margin-top: 40px; padding: 36px; background: #fff;
+      border: 1.5px dashed var(--border-md);
+      display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+    }
+    .custom-row p { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.2rem; color: var(--text2); }
+
+    /* ── GALLERY ── */
+    #gallery { padding: 110px 0; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; }
+    .gitem { position: relative; overflow: hidden; aspect-ratio: 1; cursor: pointer; }
+    .gitem:nth-child(1) { grid-column: span 2; aspect-ratio: 2/1; }
+    .gitem:nth-child(5) { grid-column: span 2; aspect-ratio: 2/1; }
+    .gitem img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+    .gitem:hover img { transform: scale(1.07); }
+    .g-overlay {
+      position: absolute; inset: 0; background: rgba(61,107,82,0.5);
+      opacity: 0; transition: opacity 0.4s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .gitem:hover .g-overlay { opacity: 1; }
+    .g-icon {
+      width: 54px; height: 54px; border: 2px solid #fff; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 1rem;
+      transform: scale(0.7); transition: transform 0.4s;
+    }
+    .gitem:hover .g-icon { transform: scale(1); }
+
+    /* LIGHTBOX */
+    .lb { position: fixed; inset: 0; background: rgba(28,20,16,0.96); z-index: 500; display: none; align-items: center; justify-content: center; }
+    .lb.open { display: flex; }
+    .lb img { max-width: 90vw; max-height: 84vh; object-fit: contain; box-shadow: var(--shadow-lg); }
+    .lb-close { position: absolute; top: 24px; right: 32px; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; width: 44px; height: 44px; border: 1px solid rgba(255,255,255,0.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: background 0.3s; }
+    .lb-close:hover { background: rgba(255,255,255,0.12); }
+
+    /* ── BOOKING ── */
+    #booking { padding: 110px 0; background: var(--bg2); }
+    .booking-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+    .booking-left h2 { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 400; line-height: 1.2; margin-bottom: 14px; }
+    .booking-left > p { font-size: 0.9rem; color: var(--text2); line-height: 1.8; margin-bottom: 36px; }
+    .steps { display: flex; flex-direction: column; }
+    .step { display: flex; gap: 20px; padding: 22px 0; border-bottom: 1px solid var(--border); }
+    .step:last-child { border-bottom: none; }
+    .step-icon {
+      width: 46px; height: 46px; border-radius: 50%; flex-shrink: 0;
+      background: var(--rose-dim); border: 1.5px solid var(--rose-lt);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--rose); font-size: 0.95rem;
+    }
+    .step-body h4 { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--text); margin-bottom: 5px; }
+    .step-body p { font-size: 0.83rem; color: var(--muted); line-height: 1.7; }
+    .booking-form { background: #fff; border: 1px solid var(--border); padding: 48px; box-shadow: var(--shadow-sm); }
+    .booking-form h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--text); margin-bottom: 6px; }
+    .form-sub { font-size: 0.83rem; color: var(--muted); margin-bottom: 32px; display: flex; align-items: center; gap: 8px; }
+    .form-sub i { color: #25D366; font-size: 0.9rem; }
+    .fg { margin-bottom: 18px; }
+    .fg label { display: block; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text2); margin-bottom: 7px; }
+    .fg input, .fg select, .fg textarea {
+      width: 100%; border: 1px solid var(--border-md); background: var(--bg);
+      color: var(--text); padding: 11px 14px; font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem; outline: none; transition: border-color 0.3s;
+      border-radius: 2px; appearance: none;
+    }
+    .fg input:focus, .fg select:focus, .fg textarea:focus { border-color: var(--green); background: #fff; }
+    .fg textarea { height: 88px; resize: vertical; }
+    .fg select option { background: #fff; }
+    .fg-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .input-icon { position: relative; }
+    .input-icon i { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 0.82rem; pointer-events: none; }
+    .input-icon input, .input-icon select { padding-left: 36px; }
+    .btn-submit {
+      width: 100%; padding: 15px; background: var(--green); color: #fff; border: none;
+      font-family: 'DM Sans', sans-serif; font-size: 0.82rem; letter-spacing: 0.14em;
+      text-transform: uppercase; cursor: pointer; transition: all 0.3s; border-radius: 2px;
+      margin-top: 8px; display: flex; align-items: center; justify-content: center; gap: 10px;
+    }
+    .btn-submit:hover { background: var(--green-lt); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(61,107,82,0.3); }
+    .form-note { text-align: center; margin-top: 14px; font-size: 0.74rem; color: var(--muted); display: flex; align-items: center; justify-content: center; gap: 6px; }
+    .form-note i { color: #25D366; }
+
+    /* ── TESTIMONIALS ── */
+    #reviews { padding: 110px 0; }
+    .reviews-track-wrap { overflow: hidden; margin: 0 -56px; padding: 12px 0; }
+    .reviews-track { display: flex; gap: 20px; width: max-content; animation: scrollReviews 30s linear infinite; }
+    .reviews-track:hover { animation-play-state: paused; }
+    @keyframes scrollReviews { 0%{transform:translateX(0);} 100%{transform:translateX(-50%);} }
+    .rv-card { min-width: 340px; padding: 36px; background: #fff; border: 1px solid var(--border); flex-shrink: 0; position: relative; }
+    .rv-card::before { content: '\f10d'; font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; top: 20px; right: 24px; font-size: 2.5rem; color: var(--rose-dim); line-height: 1; }
+    .rv-stars { display: flex; gap: 3px; margin-bottom: 16px; }
+    .rv-stars i { color: #f5a623; font-size: 0.75rem; }
+    .rv-quote { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.08rem; color: var(--text); line-height: 1.75; margin-bottom: 22px; }
+    .rv-author { display: flex; align-items: center; gap: 10px; }
+    .rv-avatar { width: 36px; height: 36px; background: var(--green-dim); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--green); font-size: 0.8rem; flex-shrink: 0; }
+    .rv-name { font-size: 0.82rem; font-weight: 500; color: var(--text2); }
+    .rv-occ { font-size: 0.7rem; color: var(--rose); margin-top: 2px; display: flex; align-items: center; gap: 5px; }
+    .rv-occ i { font-size: 0.65rem; }
+
+    /* ── CONTACT ── */
+    #contact { padding: 110px 0; background: var(--green); }
+    .contact-inner { text-align: center; }
+    .contact-inner .eyebrow { color: rgba(255,255,255,0.55); }
+    .contact-inner .eyebrow::before, .contact-inner .eyebrow::after { color: rgba(255,255,255,0.3); }
+    .contact-inner h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem,4vw,3.2rem); font-weight: 400; color: #fff; margin-bottom: 14px; }
+    .contact-inner > p { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.3rem; color: rgba(255,255,255,0.7); margin-bottom: 52px; }
+    .contact-cards { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-bottom: 48px; }
+    .cc {
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+      padding: 32px 20px; text-align: center; text-decoration: none; color: #fff;
+      transition: all 0.3s; border-radius: 4px;
+    }
+    .cc:hover { background: rgba(255,255,255,0.16); transform: translateY(-5px); }
+    .cc-icon { width: 52px; height: 52px; border-radius: 50%; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; }
+    .cc-icon.phone { background: rgba(255,255,255,0.12); }
+    .cc-icon.wa { background: rgba(37,211,102,0.2); }
+    .cc-icon.ig { background: rgba(193,53,132,0.2); }
+    .cc-icon.tk { background: rgba(105,201,208,0.2); }
+    .cc-label { font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 6px; }
+    .cc-value { font-size: 0.9rem; font-weight: 500; }
+    .contact-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-white { background: #fff; color: var(--green); padding: 15px 40px; text-decoration: none; font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; transition: all 0.3s; border-radius: 2px; font-family: 'DM Sans', sans-serif; display: inline-flex; align-items: center; gap: 9px; }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .btn-outline-white { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,0.45); padding: 15px 40px; text-decoration: none; font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; transition: all 0.3s; border-radius: 2px; font-family: 'DM Sans', sans-serif; display: inline-flex; align-items: center; gap: 9px; }
+    .btn-outline-white:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
+
+    /* ── FOOTER ── */
+    footer { padding: 60px 0 28px; background: #fff; border-top: 1px solid var(--border); }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 48px; }
+    .f-brand { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--green); margin-bottom: 12px; display: flex; align-items: center; gap: 9px; }
+    .f-brand i { font-size: 1rem; color: var(--rose); }
+    .f-brand span { color: var(--rose); font-style: italic; font-weight: 400; }
+    .f-tag { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1rem; color: var(--muted); line-height: 1.7; margin-bottom: 24px; }
+    .socials { display: flex; gap: 10px; }
+    .soc { width: 38px; height: 38px; border: 1px solid var(--border-md); display: flex; align-items: center; justify-content: center; color: var(--muted); text-decoration: none; font-size: 0.9rem; transition: all 0.3s; border-radius: 2px; }
+    .soc:hover { background: var(--green); color: #fff; border-color: var(--green); }
+    .f-col h4 { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--green); margin-bottom: 20px; }
+    .f-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .f-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; display: flex; align-items: center; gap: 8px; }
+    .f-links a i { font-size: 0.65rem; color: var(--rose); width: 12px; }
+    .f-links a:hover { color: var(--rose); }
+    .footer-btm { border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .footer-btm p { font-size: 0.75rem; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+    .footer-btm span { color: var(--rose); }
+
+    /* ── FLOATING WA ── */
+    .wa-float {
+      position: fixed; bottom: 28px; right: 28px; width: 58px; height: 58px;
+      background: #25D366; border-radius: 50%; display: flex; align-items: center;
+      justify-content: center; text-decoration: none; z-index: 200;
+      box-shadow: 0 6px 24px rgba(37,211,102,0.45);
+      animation: waPulse 2.8s ease-in-out infinite;
+    }
+    .wa-float i { font-size: 1.6rem; color: #fff; }
+    @keyframes waPulse { 0%,100%{box-shadow:0 6px 24px rgba(37,211,102,0.45);} 50%{box-shadow:0 6px 44px rgba(37,211,102,0.72);} }
+    .wa-tip {
+      position: absolute; right: 70px; white-space: nowrap;
+      background: var(--text); color: #fff; font-size: 0.74rem;
+      padding: 8px 14px; border-radius: 4px;
+      opacity: 0; pointer-events: none; transition: opacity 0.3s;
+    }
+    .wa-tip::after { content:''; position:absolute; right:-6px; top:50%; transform:translateY(-50%); border:6px solid transparent; border-left-color:var(--text); border-right:none; }
+    .wa-float:hover .wa-tip { opacity: 1; }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:1024px){
+      .packages-grid{grid-template-columns:repeat(2,1fr);}
+      .footer-grid{grid-template-columns:1fr 1fr;}
+      .contact-cards{grid-template-columns:repeat(2,1fr);}
+    }
+    @media(max-width:768px){
+      nav{padding:16px 24px;} nav.scrolled{padding:12px 24px;}
+      .nav-links,.nav-cta{display:none;} .hamburger{display:flex;}
+      .section-wrap{padding:0 24px;}
+      .hero-inner{grid-template-columns:1fr;gap:48px;padding:100px 24px 60px;}
+      .hero-visual{order:-1;}
+      .hero-badge{left:0;bottom:24px;} .hero-badge2{right:0;top:24px;}
+      .stats-grid{grid-template-columns:repeat(2,1fr);}
+      .stat-item{border-right:none;border-bottom:1px solid rgba(255,255,255,0.14);}
+      .occ-grid{grid-template-columns:1fr;}
+      .packages-grid{grid-template-columns:1fr;}
+      .gallery-grid{grid-template-columns:repeat(2,1fr);}
+      .gitem:nth-child(1),.gitem:nth-child(5){grid-column:span 1;aspect-ratio:1;}
+      .booking-grid{grid-template-columns:1fr;}
+      .booking-form{padding:32px 24px;}
+      .fg-row{grid-template-columns:1fr;}
+      .contact-cards{grid-template-columns:1fr 1fr;}
+      .footer-grid{grid-template-columns:1fr;gap:32px;}
+      .footer-btm{flex-direction:column;text-align:center;}
+      .reviews-track-wrap{margin:0 -24px;}
+    }
+    @media(max-width:480px){
+      .occ-grid{grid-template-columns:1fr;}
+      .contact-cards{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#hero" class="nav-logo"><i class="fa-solid fa-seedling"></i>Flower <span>Atelier</span></a>
+  <ul class="nav-links">
+    <li><a href="#occasions">Occasions</a></li>
+    <li><a href="#collection">Collection</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#booking">Book</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#booking" class="nav-cta"><i class="fa-solid fa-calendar-check"></i>Book Now</a>
+  <button class="hamburger" id="ham" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobMenu">
+  <a href="#occasions" class="mob-lnk">Occasions</a>
+  <a href="#collection" class="mob-lnk">Collection</a>
+  <a href="#gallery" class="mob-lnk">Gallery</a>
+  <a href="#booking" class="mob-lnk">Book a Bouquet</a>
+  <a href="#contact" class="mob-lnk">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-decor"><div class="hc hc1"></div><div class="hc hc2"></div><div class="hc hc3"></div></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-eyebrow"><i class="fa-solid fa-location-dot"></i>Nairobi's Premium Florist</div>
+      <h1 class="hero-title">Bringing beauty<br>to life, <em>one bloom</em><br>at a time.</h1>
+      <p class="hero-sub">Handcrafted premium bouquets for every occasion that matters — anniversaries, weddings, events &amp; graduations.</p>
+      <div class="hero-tags">
+        <span class="tag"><i class="fa-solid fa-heart"></i>Anniversaries</span>
+        <span class="tag"><i class="fa-solid fa-ring"></i>Weddings</span>
+        <span class="tag"><i class="fa-solid fa-star"></i>Events</span>
+        <span class="tag"><i class="fa-solid fa-graduation-cap"></i>Graduations</span>
+        <span class="tag"><i class="fa-solid fa-truck-fast"></i>Same-day delivery</span>
+      </div>
+      <div class="hero-btns">
+        <a href="#collection" class="btn-primary"><i class="fa-solid fa-layer-group"></i>View Collection</a>
+        <a href="#booking" class="btn-ghost"><i class="fa-solid fa-calendar-plus"></i>Book a Bouquet</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-img-wrap">
+        <img src="https://images.unsplash.com/photo-1562690868-60bbe7293e94?w=800&q=80" alt="Premium bouquet by Flower Atelier">
+      </div>
+      <div class="hero-badge">
+        <div class="hero-badge-num">1,298</div>
+        <div class="hero-badge-label">Happy Customers</div>
+      </div>
+      <div class="hero-badge2"><i class="fa-solid fa-star"></i>Top-rated florist</div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section id="stats">
+  <div class="section-wrap">
+    <div class="stats-grid">
+      <div class="stat-item reveal"><div class="stat-icon"><i class="fa-solid fa-images"></i></div><div class="stat-num" data-target="81">0</div><div class="stat-lbl">Bouquets Showcased</div></div>
+      <div class="stat-item reveal d1"><div class="stat-icon"><i class="fa-solid fa-users"></i></div><div class="stat-num" data-target="1298">0</div><div class="stat-lbl">Happy Clients</div></div>
+      <div class="stat-item reveal d2"><div class="stat-icon"><i class="fa-solid fa-calendar-days"></i></div><div class="stat-num" data-target="4">0</div><div class="stat-lbl">Occasions Covered</div></div>
+      <div class="stat-item reveal d3"><div class="stat-icon"><i class="fa-solid fa-seedling"></i></div><div class="stat-num" data-target="100">0</div><div class="stat-lbl">Max Stems Available</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- OCCASIONS -->
+<section id="occasions">
+  <div class="section-wrap">
+    <div class="section-hdr reveal">
+      <p class="eyebrow">What We Do</p>
+      <h2 class="section-title">Flowers for every <em>celebration</em></h2>
+      <div class="divider"></div>
+      <p class="section-sub">Every important moment in your life deserves to be adorned beautifully.</p>
+    </div>
+  </div>
+  <div class="occ-grid">
+    <div class="occ-card reveal">
+      <img src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=900&q=80" alt="Anniversary bouquet">
+      <span class="occ-label">Anniversaries</span>
+      <div class="occ-overlay">
+        <div class="occ-icon-wrap"><i class="fa-solid fa-heart"></i></div>
+        <h3 class="occ-title">Anniversaries</h3>
+        <p class="occ-desc">Say "I love you" again with a stunning arrangement that speaks louder than any words could.</p>
+        <a href="#booking" class="occ-cta"><i class="fa-solid fa-arrow-right"></i>Book Now</a>
+      </div>
+    </div>
+    <div class="occ-card reveal d1">
+      <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=900&q=80" alt="Wedding flowers">
+      <span class="occ-label">Weddings</span>
+      <div class="occ-overlay">
+        <div class="occ-icon-wrap"><i class="fa-solid fa-ring"></i></div>
+        <h3 class="occ-title">Weddings</h3>
+        <p class="occ-desc">From the aisle to the altar, we craft floral magic for your perfect day.</p>
+        <a href="#booking" class="occ-cta"><i class="fa-solid fa-arrow-right"></i>Book Now</a>
+      </div>
+    </div>
+    <div class="occ-card reveal d2">
+      <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=900&q=80" alt="Event decoration">
+      <span class="occ-label">Events</span>
+      <div class="occ-overlay">
+        <div class="occ-icon-wrap"><i class="fa-solid fa-champagne-glasses"></i></div>
+        <h3 class="occ-title">Events</h3>
+        <p class="occ-desc">Elevate any corporate or social gathering with elegant, fresh floral décor.</p>
+        <a href="#booking" class="occ-cta"><i class="fa-solid fa-arrow-right"></i>Book Now</a>
+      </div>
+    </div>
+    <div class="occ-card reveal d3">
+      <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=900&q=80" alt="Graduation bouquet">
+      <span class="occ-label">Graduations</span>
+      <div class="occ-overlay">
+        <div class="occ-icon-wrap"><i class="fa-solid fa-graduation-cap"></i></div>
+        <h3 class="occ-title">Graduations</h3>
+        <p class="occ-desc">Celebrate their achievement with a bouquet as remarkable as they are.</p>
+        <a href="#booking" class="occ-cta"><i class="fa-solid fa-arrow-right"></i>Book Now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COLLECTION -->
+<section id="collection">
+  <div class="section-wrap">
+    <div class="section-hdr reveal">
+      <p class="eyebrow">Our Collection</p>
+      <h2 class="section-title">Choose your <em>perfect bouquet</em></h2>
+      <div class="divider"></div>
+      <p class="section-sub">Handpicked stems, masterfully arranged for maximum beauty and freshness.</p>
+    </div>
+    <div class="packages-grid">
+      <div class="pkg reveal">
+        <div class="pkg-icon"><i class="fa-solid fa-leaf"></i></div>
+        <div class="pkg-stems">60</div>
+        <div class="pkg-unit">Stems</div>
+        <div class="pkg-type">Roses &amp; Lilies</div>
+        <ul class="pkg-list">
+          <li><i class="fa-solid fa-circle-check"></i>Mixed premium blooms</li>
+          <li><i class="fa-solid fa-circle-check"></i>Elegant floral wrap</li>
+          <li><i class="fa-solid fa-circle-check"></i>Handwritten card</li>
+          <li><i class="fa-solid fa-circle-check"></i>Nairobi delivery</li>
+        </ul>
+        <div class="pkg-price">KES 2,500 <sub>/ bouquet</sub></div>
+        <a href="https://wa.me/254117138908?text=Hi%20Flower%20Atelier!%20%F0%9F%8C%B8%0A%0AI%27d%20like%20to%20order%20a%2060-stem%20bouquet%20(KES%202%2C500).%20Could%20you%20confirm%20availability%3F" class="btn-order" target="_blank"><i class="fa-brands fa-whatsapp"></i>Order via WhatsApp</a>
+      </div>
+      <div class="pkg reveal d1">
+        <div class="pkg-icon"><i class="fa-solid fa-spa"></i></div>
+        <div class="pkg-stems">70</div>
+        <div class="pkg-unit">Stems</div>
+        <div class="pkg-type">Roses &amp; Mixed Blooms</div>
+        <ul class="pkg-list">
+          <li><i class="fa-solid fa-circle-check"></i>Mixed premium blooms</li>
+          <li><i class="fa-solid fa-circle-check"></i>Luxury floral wrap</li>
+          <li><i class="fa-solid fa-circle-check"></i>Handwritten card</li>
+          <li><i class="fa-solid fa-circle-check"></i>Nairobi delivery</li>
+        </ul>
+        <div class="pkg-price">KES 3,000 <sub>/ bouquet</sub></div>
+        <a href="https://wa.me/254117138908?text=Hi%20Flower%20Atelier!%20%F0%9F%8C%B8%0A%0AI%27d%20like%20to%20order%20a%2070-stem%20bouquet%20(KES%203%2C000).%20Could%20you%20confirm%20availability%3F" class="btn-order" target="_blank"><i class="fa-brands fa-whatsapp"></i>Order via WhatsApp</a>
+      </div>
+      <div class="pkg pop reveal d2">
+        <div class="pop-tag">Most Popular</div>
+        <div class="pkg-icon"><i class="fa-solid fa-rose"></i></div>
+        <div class="pkg-stems">80</div>
+        <div class="pkg-unit">Stems</div>
+        <div class="pkg-type">Premium Roses</div>
+        <ul class="pkg-list">
+          <li><i class="fa-solid fa-circle-check"></i>Select premium roses</li>
+          <li><i class="fa-solid fa-circle-check"></i>Satin luxury wrap</li>
+          <li><i class="fa-solid fa-circle-check"></i>Personalized card</li>
+          <li><i class="fa-solid fa-circle-check"></i>Priority delivery</li>
+        </ul>
+        <div class="pkg-price">KES 3,500 <sub>/ bouquet</sub></div>
+        <a href="https://wa.me/254117138908?text=Hi%20Flower%20Atelier!%20%F0%9F%8C%B8%0A%0AI%27d%20like%20to%20order%20an%2080-stem%20bouquet%20(KES%203%2C500).%20Could%20you%20confirm%20availability%3F" class="btn-order" target="_blank"><i class="fa-brands fa-whatsapp"></i>Order via WhatsApp</a>
+      </div>
+      <div class="pkg reveal d3">
+        <div class="pkg-icon"><i class="fa-solid fa-crown"></i></div>
+        <div class="pkg-stems">100</div>
+        <div class="pkg-unit">Stems</div>
+        <div class="pkg-type">Grand Luxury Roses</div>
+        <ul class="pkg-list">
+          <li><i class="fa-solid fa-circle-check"></i>Top-grade roses</li>
+          <li><i class="fa-solid fa-circle-check"></i>Premium gift box</li>
+          <li><i class="fa-solid fa-circle-check"></i>Personalized card</li>
+          <li><i class="fa-solid fa-circle-check"></i>VIP delivery</li>
+        </ul>
+        <div class="pkg-price">KES 4,500 <sub>/ bouquet</sub></div>
+        <a href="https://wa.me/254117138908?text=Hi%20Flower%20Atelier!%20%F0%9F%8C%B8%0A%0AI%27d%20like%20to%20order%20a%20100-stem%20bouquet%20(KES%204%2C500).%20Could%20you%20confirm%20availability%3F" class="btn-order" target="_blank"><i class="fa-brands fa-whatsapp"></i>Order via WhatsApp</a>
+      </div>
+    </div>
+    <div class="custom-row reveal">
+      <p>"Something extra special in mind? We create fully custom arrangements for any occasion and budget."</p>
+      <a href="https://wa.me/254117138908?text=Hi%20Flower%20Atelier!%20I%27d%20like%20to%20discuss%20a%20custom%20bouquet%20arrangement." class="btn-ghost" target="_blank"><i class="fa-brands fa-whatsapp"></i>Request Custom</a>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="section-wrap">
+    <div class="section-hdr reveal">
+      <p class="eyebrow">Our Work</p>
+      <h2 class="section-title">A gallery of <em>blooms</em></h2>
+      <div class="divider"></div>
+      <p class="section-sub">Every bouquet tells a story. Here are some of ours.</p>
+    </div>
+  </div>
+  <div class="gallery-grid">
+    <div class="gitem reveal" onclick="openLB(this)">
+      <img src="https://images.unsplash.com/photo-1562690868-60bbe7293e94?w=1200&q=80" alt="Large red roses bouquet">
+      <div class="g-overlay"><div class="g-icon"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+    </div>
+    <div class="gitem reveal d1" onclick="openLB(this)">
+      <img src="https://images.unsplash.com/photo-1487530811015-780e6e14fa20?w=700&q=80" alt="Mixed flower arrangement">
+      <div class="g-overlay"><div class="g-icon"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+    </div>
+    <div class="gitem reveal d2" onclick="openLB(this)">
+      <img src="https://images.unsplash.com/photo-1490750967868-88df5691cc9a?w=700&q=80" alt="Pink roses arrangement">
+      <div class="g-overlay"><div class="g-icon"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+    </div>
+    <div class="gitem reveal d1" onclick="openLB(this)">
+      <img src="https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?w=700&q=80" alt="Yellow lily bouquet">
+      <div class="g-overlay"><div class="g-icon"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+    </div>
+    <div class="gitem reveal d2" onclick="openLB(this)">
+      <img src="https://images.unsplash.com/photo-1548094990-c16ca90f1f0d?w=1200&q=80" alt="Luxury white flower bouquet">
+      <div class="g-overlay"><div class="g-icon"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+    </div>
+    <div class="gitem reveal d3" onclick="openLB(this)">
+      <img src="https://images.unsplash.com/photo-1559181567-c3190ca9be46?w=700&q=80" alt="Colourful bouquet">
+      <div class="g-overlay"><div class="g-icon"><i class="fa-solid fa-magnifying-glass-plus"></i></div></div>
+    </div>
+  </div>
+</section>
+<div class="lb" id="lb">
+  <button class="lb-close" onclick="closeLB()"><i class="fa-solid fa-xmark"></i></button>
+  <img id="lbImg" src="" alt="">
+</div>
+
+<!-- BOOKING -->
+<section id="booking">
+  <div class="section-wrap">
+    <div class="booking-grid">
+      <div class="booking-left reveal">
+        <p class="eyebrow" style="text-align:left;display:block;margin-bottom:14px;">How to Order</p>
+        <h2>Simple. Fast. <em style="font-style:italic;color:var(--rose)">Beautiful.</em></h2>
+        <p>Booking your bouquet takes less than two minutes. Fill the form and we'll reach you on WhatsApp to confirm and arrange delivery.</p>
+        <div class="steps">
+          <div class="step">
+            <div class="step-icon"><i class="fa-solid fa-pen-to-square"></i></div>
+            <div class="step-body">
+              <h4>Fill the Form</h4>
+              <p>Tell us your occasion, preferred package, and delivery date. Takes under 2 minutes.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-icon"><i class="fa-brands fa-whatsapp"></i></div>
+            <div class="step-body">
+              <h4>We Confirm on WhatsApp</h4>
+              <p>Our team reaches you within minutes to confirm your order and arrange payment.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-icon"><i class="fa-solid fa-truck-fast"></i></div>
+            <div class="step-body">
+              <h4>Receive &amp; Delight</h4>
+              <p>We deliver fresh to your doorstep in Nairobi. Watch their face light up.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal d2">
+        <div class="booking-form">
+          <h3>Book Your Bouquet</h3>
+          <p class="form-sub"><i class="fa-brands fa-whatsapp"></i>We confirm your order via WhatsApp within minutes.</p>
+          <div class="fg-row">
+            <div class="fg">
+              <label>Your Name *</label>
+              <div class="input-icon"><i class="fa-solid fa-user"></i><input type="text" id="bName" placeholder="Jane Mwangi"></div>
+            </div>
+            <div class="fg">
+              <label>WhatsApp Number *</label>
+              <div class="input-icon"><i class="fa-solid fa-phone"></i><input type="tel" id="bPhone" placeholder="07XX XXX XXX"></div>
+            </div>
+          </div>
+          <div class="fg">
+            <label>Occasion *</label>
+            <div class="input-icon"><i class="fa-solid fa-calendar-days"></i>
+              <select id="bOccasion">
+                <option value="">Select occasion...</option>
+                <option>Anniversary</option>
+                <option>Wedding</option>
+                <option>Graduation</option>
+                <option>Birthday</option>
+                <option>Corporate Event</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="fg-row">
+            <div class="fg">
+              <label>Package *</label>
+              <div class="input-icon"><i class="fa-solid fa-layer-group"></i>
+                <select id="bPkg">
+                  <option value="">Select package...</option>
+                  <option>60 Stems — KES 2,500</option>
+                  <option>70 Stems — KES 3,000</option>
+                  <option>80 Stems — KES 3,500</option>
+                  <option>100 Stems — KES 4,500</option>
+                  <option>Custom Arrangement</option>
+                </select>
+              </div>
+            </div>
+            <div class="fg">
+              <label>Delivery Date *</label>
+              <div class="input-icon"><i class="fa-solid fa-calendar"></i><input type="date" id="bDate"></div>
+            </div>
+          </div>
+          <div class="fg">
+            <label>Delivery Location</label>
+            <div class="input-icon"><i class="fa-solid fa-location-dot"></i><input type="text" id="bLocation" placeholder="e.g. Westlands, Nairobi"></div>
+          </div>
+          <div class="fg">
+            <label>Special Requests</label>
+            <textarea id="bMsg" placeholder="Preferred colours, card message, anything special..."></textarea>
+          </div>
+          <button class="btn-submit" onclick="submitBooking()"><i class="fa-brands fa-whatsapp"></i>Send Booking via WhatsApp</button>
+          <p class="form-note"><i class="fa-brands fa-whatsapp"></i>Opens WhatsApp with your booking details pre-filled</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="reviews">
+  <div class="section-wrap">
+    <div class="section-hdr reveal">
+      <p class="eyebrow">Kind Words</p>
+      <h2 class="section-title">What our clients <em>say</em></h2>
+      <div class="divider"></div>
+    </div>
+  </div>
+  <div class="reviews-track-wrap">
+    <div class="reviews-track">
+      <div class="rv-card"><div class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="rv-quote">"Absolutely stunning arrangement. My wife was in tears when I surprised her — in the best way possible."</p><div class="rv-author"><div class="rv-avatar"><i class="fa-solid fa-user"></i></div><div><div class="rv-name">Brian M.</div><div class="rv-occ"><i class="fa-solid fa-heart"></i>Anniversary · 80 stems</div></div></div></div>
+      <div class="rv-card"><div class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="rv-quote">"Ordered for my graduation and the flowers were fresh, beautifully wrapped and on time. Everyone asked where I got them."</p><div class="rv-author"><div class="rv-avatar"><i class="fa-solid fa-user"></i></div><div><div class="rv-name">Amina W.</div><div class="rv-occ"><i class="fa-solid fa-graduation-cap"></i>Graduation · 60 stems</div></div></div></div>
+      <div class="rv-card"><div class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="rv-quote">"Used Flower Atelier for our wedding bouquets and they were breathtaking. So professional and reliable."</p><div class="rv-author"><div class="rv-avatar"><i class="fa-solid fa-user"></i></div><div><div class="rv-name">Kevin &amp; Grace N.</div><div class="rv-occ"><i class="fa-solid fa-ring"></i>Wedding · Custom</div></div></div></div>
+      <div class="rv-card"><div class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="rv-quote">"The 100-stem bouquet I got for my mum was absolutely breathtaking. She still talks about it to this day."</p><div class="rv-author"><div class="rv-avatar"><i class="fa-solid fa-user"></i></div><div><div class="rv-name">Sharon K.</div><div class="rv-occ"><i class="fa-solid fa-gift"></i>Special Gift · 100 stems</div></div></div></div>
+      <div class="rv-card"><div class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="rv-quote">"Quick response on WhatsApp, beautiful flowers, on-time delivery. Best florist in Nairobi, period."</p><div class="rv-author"><div class="rv-avatar"><i class="fa-solid fa-user"></i></div><div><div class="rv-name">David O.</div><div class="rv-occ"><i class="fa-solid fa-briefcase"></i>Corporate Event</div></div></div></div>
+      <!-- duplicated for infinite loop -->
+      <div class="rv-card"><div class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="rv-quote">"Absolutely stunning arrangement. My wife was in tears when I surprised her — in the best way possible."</p><div class="rv-author"><div class="rv-avatar"><i class="fa-solid fa-user"></i></div><div><div class="rv-name">Brian M.</div><div class="rv-occ"><i class="fa-solid fa-heart"></i>Anniversary · 80 stems</div></div></div></div>
+      <div class="rv-card"><div class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="rv-quote">"Ordered for my graduation and the flowers were fresh, beautifully wrapped and on time. Everyone asked where I got them."</p><div class="rv-author"><div class="rv-avatar"><i class="fa-solid fa-user"></i></div><div><div class="rv-name">Amina W.</div><div class="rv-occ"><i class="fa-solid fa-graduation-cap"></i>Graduation · 60 stems</div></div></div></div>
+      <div class="rv-card"><div class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="rv-quote">"Used Flower Atelier for our wedding bouquets and they were breathtaking. So professional and reliable."</p><div class="rv-author"><div class="rv-avatar"><i class="fa-solid fa-user"></i></div><div><div class="rv-name">Kevin &amp; Grace N.</div><div class="rv-occ"><i class="fa-solid fa-ring"></i>Wedding · Custom</div></div></div></div>
+      <div class="rv-card"><div class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="rv-quote">"The 100-stem bouquet I got for my mum was absolutely breathtaking. She still talks about it to this day."</p><div class="rv-author"><div class="rv-avatar"><i class="fa-solid fa-user"></i></div><div><div class="rv-name">Sharon K.</div><div class="rv-occ"><i class="fa-solid fa-gift"></i>Special Gift · 100 stems</div></div></div></div>
+      <div class="rv-card"><div class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="rv-quote">"Quick response on WhatsApp, beautiful flowers, on-time delivery. Best florist in Nairobi, period."</p><div class="rv-author"><div class="rv-avatar"><i class="fa-solid fa-user"></i></div><div><div class="rv-name">David O.</div><div class="rv-occ"><i class="fa-solid fa-briefcase"></i>Corporate Event</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-wrap">
+    <div class="contact-inner">
+      <p class="eyebrow">Get in Touch</p>
+      <h2>Ready to order something <em style="font-style:italic">beautiful?</em></h2>
+      <p>Reach us directly — we respond fast.</p>
+      <div class="contact-cards">
+        <a href="tel:0117138908" class="cc"><div class="cc-icon phone"><i class="fa-solid fa-phone"></i></div><div class="cc-label">Call Us</div><div class="cc-value">0117 138 908</div></a>
+        <a href="https://wa.me/254117138908" target="_blank" class="cc"><div class="cc-icon wa"><i class="fa-brands fa-whatsapp"></i></div><div class="cc-label">WhatsApp</div><div class="cc-value">Chat Now</div></a>
+        <a href="https://www.instagram.com/flower_atelieer" target="_blank" class="cc"><div class="cc-icon ig"><i class="fa-brands fa-instagram"></i></div><div class="cc-label">Instagram</div><div class="cc-value">@flower_atelieer</div></a>
+        <a href="https://www.tiktok.com/@flower_atelieer" target="_blank" class="cc"><div class="cc-icon tk"><i class="fa-brands fa-tiktok"></i></div><div class="cc-label">TikTok</div><div class="cc-value">@flower_atelieer</div></a>
+      </div>
+      <div class="contact-btns">
+        <a href="#booking" class="btn-white"><i class="fa-solid fa-calendar-plus"></i>Book a Bouquet</a>
+        <a href="https://wa.me/254117138908" target="_blank" class="btn-outline-white"><i class="fa-brands fa-whatsapp"></i>WhatsApp Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="section-wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="f-brand"><i class="fa-solid fa-seedling"></i>Flower <span>Atelier</span></div>
+        <p class="f-tag">"Bringing beauty to life,<br>one bloom at a time."</p>
+        <div class="socials">
+          <a href="https://www.instagram.com/flower_atelieer" target="_blank" class="soc" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.tiktok.com/@flower_atelieer" target="_blank" class="soc" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+          <a href="https://wa.me/254117138908" target="_blank" class="soc" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="tel:0117138908" class="soc" title="Call"><i class="fa-solid fa-phone"></i></a>
+        </div>
+      </div>
+      <div class="f-col">
+        <h4>Services</h4>
+        <ul class="f-links">
+          <li><a href="#occasions"><i class="fa-solid fa-heart"></i>Anniversaries</a></li>
+          <li><a href="#occasions"><i class="fa-solid fa-ring"></i>Weddings</a></li>
+          <li><a href="#occasions"><i class="fa-solid fa-graduation-cap"></i>Graduations</a></li>
+          <li><a href="#occasions"><i class="fa-solid fa-champagne-glasses"></i>Events</a></li>
+          <li><a href="#collection"><i class="fa-solid fa-wand-magic-sparkles"></i>Custom Bouquets</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Quick Links</h4>
+        <ul class="f-links">
+          <li><a href="#collection"><i class="fa-solid fa-layer-group"></i>Collection</a></li>
+          <li><a href="#gallery"><i class="fa-solid fa-images"></i>Gallery</a></li>
+          <li><a href="#booking"><i class="fa-solid fa-calendar-plus"></i>Book Now</a></li>
+          <li><a href="#contact"><i class="fa-solid fa-envelope"></i>Contact</a></li>
+          <li><a href="tel:0117138908"><i class="fa-solid fa-phone"></i>0117 138 908</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-btm">
+      <p><i class="fa-solid fa-copyright"></i> 2025 <span>Flower Atelier</span>. Nairobi, Kenya.</p>
+      <p>Made with <i class="fa-solid fa-heart" style="color:var(--rose)"></i> for beautiful moments</p>
+    </div>
+  </div>
+</footer>
+
+<!-- FLOATING WA -->
+<a href="https://wa.me/254117138908?text=Hi%20Flower%20Atelier!%20I%27d%20like%20to%20order%20a%20bouquet%20%F0%9F%8C%B8" target="_blank" class="wa-float">
+  <div class="wa-tip">Order on WhatsApp</div>
+  <i class="fa-brands fa-whatsapp"></i>
+</a>
+
+<script>
+  // NAV
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+
+  // MOBILE MENU
+  const ham = document.getElementById('ham');
+  const mob = document.getElementById('mobMenu');
+  ham.addEventListener('click', () => { ham.classList.toggle('open'); mob.classList.toggle('open'); });
+  document.querySelectorAll('.mob-lnk').forEach(l => l.addEventListener('click', () => { ham.classList.remove('open'); mob.classList.remove('open'); }));
+
+  // SMOOTH SCROLL
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => { const t = document.querySelector(a.getAttribute('href')); if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); } });
+  });
+
+  // REVEAL
+  const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // COUNTERS
+  function countUp(el, target) {
+    let start = null;
+    const step = ts => { if(!start) start=ts; const p=Math.min((ts-start)/2000,1); el.textContent=Math.floor((1-Math.pow(1-p,3))*target).toLocaleString(); if(p<1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  }
+  const cObs = new IntersectionObserver(entries => { entries.forEach(e => { if(e.isIntersecting){ countUp(e.target,+e.target.dataset.target); cObs.unobserve(e.target); } }); }, {threshold:0.5});
+  document.querySelectorAll('.stat-num[data-target]').forEach(el => cObs.observe(el));
+
+  // LIGHTBOX
+  function openLB(el){ document.getElementById('lbImg').src=el.querySelector('img').src; document.getElementById('lb').classList.add('open'); document.body.style.overflow='hidden'; }
+  function closeLB(){ document.getElementById('lb').classList.remove('open'); document.body.style.overflow=''; }
+  document.getElementById('lb').addEventListener('click', e => { if(e.target===e.currentTarget) closeLB(); });
+  document.addEventListener('keydown', e => { if(e.key==='Escape') closeLB(); });
+
+  // DATE MIN
+  document.getElementById('bDate').setAttribute('min', new Date().toISOString().split('T')[0]);
+
+  // BOOKING → WHATSAPP
+  function submitBooking(){
+    const name=document.getElementById('bName').value.trim();
+    const phone=document.getElementById('bPhone').value.trim();
+    const occasion=document.getElementById('bOccasion').value;
+    const pkg=document.getElementById('bPkg').value;
+    const date=document.getElementById('bDate').value;
+    const location=document.getElementById('bLocation').value.trim();
+    const msg=document.getElementById('bMsg').value.trim();
+    if(!name){alert('Please enter your name.');return;}
+    if(!phone){alert('Please enter your WhatsApp number.');return;}
+    if(!occasion){alert('Please select an occasion.');return;}
+    if(!pkg){alert('Please select a package.');return;}
+    if(!date){alert('Please select a delivery date.');return;}
+    const fmtDate=new Date(date).toLocaleDateString('en-KE',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+    let text=`Hi Flower Atelier! 🌸\n\nI'd like to place a bouquet booking:\n\n`;
+    text+=`👤 *Name:* ${name}\n📞 *Phone:* ${phone}\n🎉 *Occasion:* ${occasion}\n💐 *Package:* ${pkg}\n📅 *Delivery Date:* ${fmtDate}\n`;
+    if(location) text+=`📍 *Location:* ${location}\n`;
+    if(msg) text+=`💬 *Special Requests:* ${msg}\n`;
+    text+=`\nPlease confirm availability. Thank you! 🙏`;
+    window.open(`https://wa.me/254117138908?text=${encodeURIComponent(text)}`,'_blank');
+  }
+</script>
+</body>
+</html>
